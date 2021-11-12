@@ -9,7 +9,9 @@ from game.handle_collisions_action import HandleCollisionsAction
 from game.move_actors_action import MoveActorsAction
 from game.input_service import InputService
 from game.output_service import OutputService
-from asciimatics.screen import Screen 
+from asciimatics.screen import Screen
+
+from rfk.game.randomize_action import RandomizeActions 
 
 def main(screen):
 
@@ -28,6 +30,8 @@ def main(screen):
     robot.set_text("#")
     robot.set_position(position)
     cast["robot"] = [robot]
+
+    
 
     artifacts = []
     for n in range(constants.ARTIFACTS):
@@ -52,9 +56,10 @@ def main(screen):
     move_actors_action = MoveActorsAction()
     handle_collisions_action = HandleCollisionsAction()
     draw_actors_action = DrawActorsAction(output_service)
+    randomize_action = RandomizeActions()
 
     script["input"] = [control_actors_action]
-    script["update"] = [move_actors_action, handle_collisions_action]
+    script["update"] = [randomize_action, move_actors_action, handle_collisions_action]
     script["output"] = [draw_actors_action]
 
     # start the game
